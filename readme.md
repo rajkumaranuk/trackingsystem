@@ -5,7 +5,7 @@ The project can be executed by maven
 
 mvn clean package
 
-#Swagger-UI
+# Swagger-UI
 http://localhost:8080/iot/swagger-ui.html
 
 # Design and Implementation
