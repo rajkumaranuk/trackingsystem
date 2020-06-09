@@ -1,0 +1,58 @@
+openapi: 3.0.0
+servers:
+  - url: http://localhost:8080/iot
+info:
+  description: >-
+    This API provides the operations for Customer GPS Tracking System
+  version: 1.0.0
+  title: Tracking System
+  contact:
+    email: raj.kumaran@vodafone.com
+paths:
+  '/event/v1/':
+    post:
+      operationId: uploadTrackingData
+      description: Upload tracking data in teh form of CSV
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UploadTrackingDataRequestBody'
+      responses:
+        '200':
+          description: successfully upload the tracking data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadTrackingDataResponseBody'
+
+components:
+  parameters:
+    commentId:
+      name: commentId
+      in: query
+      description: Comment identifier
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 00000000-0000-0000-0000-000000000000
+  schemas:
+    UploadTrackingDataRequestBody:
+      properties:
+        filepath:
+          description: Exact path of the tracking data file to be uploaded
+          type: string
+          example: C:/path/to/data.csv
+      required:
+        - filepath
+
+    UploadTrackingDataResponseBody:
+      properties:
+        description:
+          description: Result of the upload operation
+          type: string
+          example: data refreshed
+      required:
+        - description
